@@ -1,0 +1,22 @@
+---
+- hosts: R1
+  connection : local
+  become : yes
+  gather_facts: no
+
+  tasks:
+   - name: configure interface fa2/0
+     ios_config:
+        lines:
+          - description test-1 interface
+          - ip address 192.168.20.1 255.255.255.0
+          - no shut
+        parents: interface FastEthernet2/0
+   - name: configure interface fa2/1
+     ios_config:
+        lines:
+          - description test-2-1 interface
+          - ip address 192.168.40.1 255.255.255.0
+          - no shut
+        parents: interface FastEthernet2/1
+
